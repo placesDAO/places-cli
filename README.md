@@ -1,7 +1,7 @@
 # PlacesDao CLI
 This is quick tool that exposes the [PlacesDAO](https://places.xyz) project over a CLI.
 
-![images/example.png]
+![images/example.png](images/example.png)
 
 ## 💾 Installation
 Assuming you have Go installed locally, you should be able to clone this repo and run directly with:
