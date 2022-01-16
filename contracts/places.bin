@@ -1,0 +1,1287 @@
+#
+#  Panoramix v4 Oct 2019 
+#  Decompiled source of 0xC9CA129DC3a299aF68A215d85771630aec4C3C2b
+# 
+#  Let's make the world open source 
+# 
+#
+#  I failed with these: 
+#  - mint()
+#  - getPlace(uint256 _tokenId)
+#  - unknown7f7b1393(?)
+#  - unknown8bb5d9c3(?)
+#  - safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes _data)
+#  - tokenURI(uint256 _tokenId)
+#  All the rest is below.
+#
+
+const unknown1aac2894 = -9 * 10^15
+const unknowna0b6e3af = (5 * 10^12 * 3600)
+const unknowna0d8a56e = -18 * 10^15
+const unknownac70cc75 = 10^14
+const unknownb50cbd9f = 0xb7c980b5d84104b28d77b0885cb8c43a6dfa5355
+const unknownb9485c32 = (25 * 10^11 * 3600)
+
+def storage:
+  stor0 is array of struct at storage 0
+  stor1 is array of struct at storage 1
+  ownerOf is mapping of addr at storage 2
+  balanceOf is mapping of uint256 at storage 3
+  approved is mapping of addr at storage 4
+  stor5 is mapping of uint8 at storage 5
+  tokenOfOwnerByIndex is mapping of uint256 at storage 6
+  stor7 is mapping of uint256 at storage 7
+  tokenByIndex is array of uint256 at storage 8
+  stor9 is mapping of uint256 at storage 9
+  stor10 is mapping of struct at storage 10
+  paused is uint8 at storage 11
+  stor12 is uint256 at storage 12
+  owner is addr at storage 13
+  stor15 is addr at storage 15
+  stor16 is addr at storage 16
+  stor17 is addr at storage 17
+  stor18 is addr at storage 18
+  stor19 is array of addr at storage 19
+  stor20 is mapping of uint8 at storage 20
+  unknownaef9bc82 is uint256 at storage 21
+  stor22 is uint256 at storage 22
+  unknown6eff3cdf is uint8 at storage 23 offset 16
+  unknown4482ae9a is uint8 at storage 23 offset 8
+  stor23 is uint8 at storage 23
+  stor23 is uint256 at storage 23 offset 8
+  stor23 is uint256 at storage 23 offset 16
+
+def getApproved(uint256 _tokenId): # not payable
+  require calldata.size - 4 >=′ 32
+  if not ownerOf[_tokenId]:
+      revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: approved query for nonexistent token'
+  return approved[_tokenId]
+
+def totalSupply(): # not payable
+  return tokenByIndex.length
+
+def tokenOfOwnerByIndex(address _owner, uint256 _index): # not payable
+  require calldata.size - 4 >=′ 64
+  require _owner == _owner
+  if not _owner:
+      revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: balance query for the zero address'
+  if _index >= balanceOf[addr(_owner)]:
+      revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721Enumerable: owner index out of bounds'
+  return tokenOfOwnerByIndex[addr(_owner)][_index]
+
+def unknown4482ae9a(): # not payable
+  return bool(unknown4482ae9a)
+
+def tokenByIndex(uint256 _index): # not payable
+  require calldata.size - 4 >=′ 32
+  if _index >= tokenByIndex.length:
+      revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721Enumerable: global index out of bounds'
+  return tokenByIndex[_index]
+
+def paused(): # not payable
+  return bool(paused)
+
+def ownerOf(uint256 _tokenId): # not payable
+  require calldata.size - 4 >=′ 32
+  if not ownerOf[_tokenId]:
+      revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: owner query for nonexistent token'
+  return ownerOf[_tokenId]
+
+def unknown6eff3cdf(): # not payable
+  return bool(unknown6eff3cdf)
+
+def balanceOf(address _owner): # not payable
+  require calldata.size - 4 >=′ 32
+  require _owner == _owner
+  if not _owner:
+      revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: balance query for the zero address'
+  return balanceOf[addr(_owner)]
+
+def owner(): # not payable
+  return owner
+
+def unknownaef9bc82(): # not payable
+  return unknownaef9bc82
+
+#
+#  Regular functions
+#
+
+def _fallback() payable: # default function
+  revert
+
+def renounceOwnership(): # not payable
+  if owner != caller:
+      revert with 0, 'Ownable: caller is not the owner'
+  owner = 0
+  log OwnershipTransferred(
+        address previousOwner=owner,
+        address newOwner=0)
+
+def unknowneddd0d9c(uint256 _param1): # not payable
+  require calldata.size - 4 >=′ 32
+  if stor16 != caller:
+      if owner != caller:
+          revert with 0, 'Not a grounder'
+  unknownaef9bc82 = _param1
+  log 0x38fbb1c8: _param1
+
+def unknown0d1b185d(): # not payable
+  require ext_code.size(stor17)
+  static call stor17.0xd1b185d with:
+          gas gas_remaining wei
+  if not ext_call.success:
+      revert with ext_call.return_data[0 len return_data.size]
+  require return_data.size >=′ 32
+  return ext_call.return_data[0]
+
+def unknown19779e28(uint256 _param1): # not payable
+  require calldata.size - 4 >=′ 32
+  require _param1 == bool(_param1)
+  if stor16 != caller:
+      if owner != caller:
+          revert with 0, 'Not a grounder'
+  Mask(248, 0, stor23.field_8) = Mask(248, 0, bool(_param1))
+  log 0x80585b6b: bool(_param1)
+
+def unknowna94193c0(uint256 _param1): # not payable
+  require calldata.size - 4 >=′ 32
+  require _param1 == bool(_param1)
+  if stor16 != caller:
+      if owner != caller:
+          revert with 0, 'Not a grounder'
+  Mask(240, 0, stor23.field_16) = Mask(240, 0, bool(_param1))
+  log 0x6cee79bc: bool(_param1)
+
+def unknown01b9a397(uint256 _param1): # not payable
+  require calldata.size - 4 >=′ 32
+  require _param1 == addr(_param1)
+  if stor16 != caller:
+      if owner != caller:
+          revert with 0, 'Not a grounder'
+  stor18 = addr(_param1)
+  log 0x6e66ab22: addr(_param1)
+
+def unknown0f753e91(uint256 _param1): # not payable
+  require calldata.size - 4 >=′ 32
+  require _param1 == addr(_param1)
+  if stor16 != caller:
+      if owner != caller:
+          revert with 0, 'Not a grounder'
+  stor16 = addr(_param1)
+  log 0xbacd45cc: addr(_param1)
+
+def unknowna4b69593(uint256 _param1): # not payable
+  require calldata.size - 4 >=′ 32
+  require _param1 == addr(_param1)
+  if stor16 != caller:
+      if owner != caller:
+          revert with 0, 'Not a grounder'
+  stor15 = addr(_param1)
+  log 0xc0a55d29: addr(_param1)
+
+def unknowna2f4bb50(uint256 _param1): # not payable
+  require calldata.size - 4 >=′ 32
+  require _param1 == bool(_param1)
+  if stor16 != caller:
+      if owner != caller:
+          revert with 0, 'Not a grounder'
+  uint8(stor23.field_0) = uint8(bool(_param1))
+  log 0x8f7a913f: bool(_param1)
+
+def unknown9bd486c6(uint256 _param1): # not payable
+  require calldata.size - 4 >=′ 32
+  require _param1 == addr(_param1)
+  if stor16 != caller:
+      if owner != caller:
+          revert with 0, 'Not a grounder'
+  stor17 = addr(_param1)
+  stor22 = sha3(block.number) % 10
+  log 0x6e1e740c: addr(_param1)
+
+def unknown5136f358(uint256 _param1): # not payable
+  require calldata.size - 4 >=′ 32
+  require _param1 == addr(_param1)
+  if stor16 != caller:
+      if owner != caller:
+          revert with 0, 'Not a grounder'
+  stor19.length++
+  addr(stor19[stor19.length]) = addr(_param1)
+  stor20[addr(_param1)] = 1
+
+def transferOwnership(address _newOwner): # not payable
+  require calldata.size - 4 >=′ 32
+  require _newOwner == _newOwner
+  if owner != caller:
+      revert with 0, 'Ownable: caller is not the owner'
+  if not _newOwner:
+      revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'Ownable: new owner is the zero address'
+  owner = _newOwner
+  log OwnershipTransferred(
+        address previousOwner=owner,
+        address newOwner=_newOwner)
+
+def setPaused(bool _paused): # not payable
+  require calldata.size - 4 >=′ 32
+  require _paused == _paused
+  if stor16 != caller:
+      if owner != caller:
+          revert with 0, 'Not a grounder'
+  if not _paused:
+      if not paused:
+          revert with 0, 'Pausable: not paused'
+      paused = 0
+      log Unpaused(address account=caller)
+  else:
+      if paused:
+          revert with 0, 'Pausable: paused'
+      paused = 1
+      log Paused(address account=caller)
+
+def setApprovalForAll(address _to, bool _approved): # not payable
+  require calldata.size - 4 >=′ 64
+  require _to == _to
+  require _approved == _approved
+  if caller == _to:
+      revert with 0, 'ERC721: approve to caller'
+  stor5[caller][addr(_to)] = uint8(_approved)
+  log ApprovalForAll(
+        address owner=_approved,
+        address operator=caller,
+        bool approved=_to)
+
+def supportsInterface(bytes4 _interfaceId): # not payable
+  require calldata.size - 4 >=′ 32
+  require _interfaceId == Mask(32, 224, _interfaceId)
+  if 0x780e9d6300000000000000000000000000000000000000000000000000000000 == Mask(32, 224, _interfaceId):
+      return True
+  if 0x80ac58cd00000000000000000000000000000000000000000000000000000000 == Mask(32, 224, _interfaceId):
+      return True
+  if 0x5b5e139f00000000000000000000000000000000000000000000000000000000 == Mask(32, 224, _interfaceId):
+      return True
+  return (Mask(32, 224, _interfaceId) == 0x1ffc9a700000000000000000000000000000000000000000000000000000000)
+
+def isApprovedForAll(address _owner, address _operator): # not payable
+  require calldata.size - 4 >=′ 64
+  require _owner == _owner
+  require _operator == _operator
+  require ext_code.size(0xb7c980b5d84104b28d77b0885cb8c43a6dfa5355)
+  static call 0xb7c980b5d84104b28d77b0885cb8c43a6dfa5355.proxies(address param1) with:
+          gas gas_remaining wei
+         args _owner
+  if not ext_call.success:
+      revert with ext_call.return_data[0 len return_data.size]
+  require return_data.size >=′ 32
+  require ext_call.return_data == ext_call.return_data[12 len 20]
+  if ext_call.return_data_operator:
+      return bool(stor5[addr(_owner)][addr(_operator)])
+  return 1
+
+def approve(address _spender, uint256 _value): # not payable
+  require calldata.size - 4 >=′ 64
+  require _spender == _spender
+  if not ownerOf[_value]:
+      revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: owner query for nonexistent token'
+  if _spender == ownerOf[_value]:
+      revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: approval to current owner'
+  if ownerOf[_value] == caller:
+      approved[_value] = _spender
+      if not ownerOf[_value]:
+          revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: owner query for nonexistent token'
+  else:
+      require ext_code.size(0xb7c980b5d84104b28d77b0885cb8c43a6dfa5355)
+      static call 0xb7c980b5d84104b28d77b0885cb8c43a6dfa5355.proxies(address param1) with:
+              gas gas_remaining wei
+             args ownerOf[_value]
+      if not ext_call.success:
+          revert with ext_call.return_data[0 len return_data.size]
+      require return_data.size >=′ 32
+      require ext_call.return_data == ext_call.return_data[12 len 20]
+      if ext_call.return_data[12 len 20] != caller:
+          if not stor5[stor2[_value]][caller]:
+              revert with 0, 'ERC721: approve caller is not owner nor approved for all'
+      approved[_value] = _spender
+      if not ownerOf[_value]:
+          revert with 0, 'ERC721: owner query for nonexistent token'
+  ('bool', ('stor', ('map', ('param', '_value'), ('name', 'ownerOf', 2))))
+  log Approval(
+        address owner=ownerOf[_value],
+        address spender=_spender,
+        uint256 value=_value)
+
+def unknown7a62b340(uint256 _param1): # not payable
+  require calldata.size - 4 >=′ 32
+  mem[0] = _param1
+  mem[32] = 2
+  if not ownerOf[_param1]:
+      revert with 0, 'Token must exist'
+  mem[96] = 0x725fa09c00000000000000000000000000000000000000000000000000000000
+  require ext_code.size(stor18)
+  static call stor18.0x725fa09c with:
+          gas gas_remaining wei
+  if not ext_call.success:
+      revert with ext_call.return_data[0 len return_data.size]
+  mem[96 len return_data.size] = ext_call.return_data[0 len return_data.size]
+  mem[64] = ceil32(return_data.size) + 96
+  require return_data.size >=′ 32
+  _7 = mem[96]
+  require mem[96] <= 18446744073709551615
+  require mem[96] + 127 <′ return_data.size + 96
+  _8 = mem[mem[96] + 96]
+  if mem[mem[96] + 96] > 18446744073709551615:
+      revert with 0, 65
+  if ceil32(ceil32(mem[mem[96] + 96])) + 1 < 0 or ceil32(return_data.size) + ceil32(ceil32(mem[mem[96] + 96])) + 97 > 18446744073709551615:
+      revert with 0, 65
+  mem[64] = ceil32(return_data.size) + ceil32(ceil32(mem[mem[96] + 96])) + 97
+  mem[ceil32(return_data.size) + 96] = _8
+  require _7 + _8 + 32 <= return_data.size
+  mem[ceil32(return_data.size) + 128 len ceil32(_8)] = mem[_7 + 128 len ceil32(_8)]
+  if ceil32(_8) > _8:
+      mem[_8 + ceil32(return_data.size) + 128] = 0
+  mem[mem[64]] = 32
+  mem[mem[64] + 32] = _8
+  mem[mem[64] + 64 len ceil32(_8)] = mem[ceil32(return_data.size) + 128 len ceil32(_8)]
+  if ceil32(_8) > _8:
+      mem[_8 + mem[64] + 64] = 0
+  return Array(len=_8, data=mem[mem[64] + 64 len ceil32(_8)])
+
+def unknown9bc4ff94(): # not payable
+  require calldata.size - 4 >=′ 32
+  require cd <= 18446744073709551615
+  require cd <′ calldata.size
+  if ('cd', 4).length > 18446744073709551615:
+      revert with 0, 65
+  if ceil32(32 * ('cd', 4).length) + 97 < 96 or ceil32(32 * ('cd', 4).length) + 97 > 18446744073709551615:
+      revert with 0, 65
+  require cd * ('cd', 4).length) + 36 <= calldata.size
+  s = 128
+  t = ('cd', 4).length
+  idx = cd[4] + 36
+  while idx < cd * ('cd', 4).length) + 36:
+      require cd[idx] == addr(cd[idx])
+      mem[s] = cd[idx]
+      s = s + 32
+      t = cd[idx]
+      idx = idx + 32
+      continue 
+  if stor16 != caller:
+      if owner != caller:
+          revert with 0, 'Not a grounder'
+  idx = 0
+  while idx < stor19.length:
+      mem[0] = addr(stor19[idx])
+      mem[32] = 20
+      if stor20[addr(stor19[idx])]:
+          if idx >= stor19.length:
+              revert with 0, 50
+          mem[0] = addr(stor19[idx])
+          mem[32] = 20
+          stor20[addr(stor19[idx])] = 0
+      if idx == -1:
+          revert with 0, 17
+      idx = idx + 1
+      continue 
+  stor19.length = 0
+  idx = 0
+  while stor19.length > idx:
+      uint256(stor19[idx]) = 0
+      idx = idx + 1
+      continue 
+  idx = 0
+  while idx < ('cd', 4).length:
+      if idx >= ('cd', 4).length:
+          revert with 0, 50
+      stor19.length++
+      mem[0] = 19
+      addr(stor19[stor19.length]) = mem[(32 * idx) + 140 len 20]
+      if idx == -1:
+          revert with 0, 17
+      idx = idx + 1
+      continue 
+  idx = 0
+  while idx < ('cd', 4).length:
+      if idx >= ('cd', 4).length:
+          revert with 0, 50
+      mem[0] = mem[(32 * idx) + 140 len 20]
+      mem[32] = 20
+      stor20[mem[(32 * idx) + 140 len 20]] = 1
+      if idx == -1:
+          revert with 0, 17
+      idx = idx + 1
+      continue 
+
+def ownerMint(uint256 _amount): # not payable
+  require calldata.size - 4 >=′ 32
+  if owner != caller:
+      revert with 0, 'Ownable: caller is not the owner'
+  if stor12 == 2:
+      revert with 0, 'ReentrancyGuard: reentrant call'
+  stor12 = 2
+  if not owner:
+      revert with 0, 'ERC721: mint to the zero address'
+  if ownerOf[_amount]:
+      revert with 0, 'ERC721: token already minted'
+  stor9[_amount] = tokenByIndex.length
+  tokenByIndex.length++
+  tokenByIndex[tokenByIndex.length] = _amount
+  if owner:
+      if owner:
+          if not owner:
+              revert with 0, 'ERC721: balance query for the zero address'
+          tokenOfOwnerByIndex[stor13][stor3[stor13]] = _amount
+          stor7[_amount] = balanceOf[stor13]
+  else:
+      if tokenByIndex.length < 1:
+          revert with 0, 17
+      if tokenByIndex.length - 1 >= tokenByIndex.length:
+          revert with 0, 50
+      if stor9[_amount] >= tokenByIndex.length:
+          revert with 0, 50
+      tokenByIndex[stor9[_amount]] = tokenByIndex[tokenByIndex.length]
+      stor9[stor8[stor8.length]] = stor9[_amount]
+      stor9[_amount] = 0
+      if not tokenByIndex.length:
+          revert with 0, 49
+      tokenByIndex[tokenByIndex.length] = 0
+      tokenByIndex.length--
+  if balanceOf[stor13] > -2:
+      revert with 0, 17
+  balanceOf[stor13]++
+  ownerOf[_amount] = owner
+  log Transfer(
+        address from=0,
+        address to=owner,
+        uint256 value=_amount)
+  if ext_code.size(owner):
+      require ext_code.size(owner)
+      call owner.onERC721Received(address operator, address from, uint256 tokenId, bytes data) with:
+           gas gas_remaining wei
+          args 0, uint32(caller), 0, _amount, 128, 0
+      if not ext_call.success:
+          if not return_data.size:
+              revert with 0, 'ERC721: transfer to non ERC721Receiver implementer'
+          if not return_data.size:
+              revert with 0, 'ERC721: transfer to non ERC721Receiver implementer'
+          revert with ext_call.return_data[0 len return_data.size]
+      require return_data.size >=′ 32
+      require ext_call.return_data == Mask(32, 224, ext_call.return_data[0])
+      if Mask(32, 224, ext_call.return_data[0]) != 0x150b7a0200000000000000000000000000000000000000000000000000000000:
+          revert with 0, 'ERC721: transfer to non ERC721Receiver implementer'
+  log 0x9e54f6a4: _amount
+  stor12 = 1
+  return _amount
+
+def unknown1f7bbae1(uint256 _param1): # not payable
+  require calldata.size - 4 >=′ 32
+  if stor16 != caller:
+      if owner != caller:
+          revert with 0, 'Not a grounder'
+  if stor12 == 2:
+      revert with 0, 'ReentrancyGuard: reentrant call'
+  stor12 = 2
+  if not stor16:
+      revert with 0, 'ERC721: mint to the zero address'
+  if ownerOf[_param1]:
+      revert with 0, 'ERC721: token already minted'
+  stor9[_param1] = tokenByIndex.length
+  tokenByIndex.length++
+  tokenByIndex[tokenByIndex.length] = _param1
+  if stor16:
+      if stor16:
+          if not stor16:
+              revert with 0, 'ERC721: balance query for the zero address'
+          tokenOfOwnerByIndex[stor16][stor3[stor16]] = _param1
+          stor7[_param1] = balanceOf[stor16]
+  else:
+      if tokenByIndex.length < 1:
+          revert with 0, 17
+      if tokenByIndex.length - 1 >= tokenByIndex.length:
+          revert with 0, 50
+      if stor9[_param1] >= tokenByIndex.length:
+          revert with 0, 50
+      tokenByIndex[stor9[_param1]] = tokenByIndex[tokenByIndex.length]
+      stor9[stor8[stor8.length]] = stor9[_param1]
+      stor9[_param1] = 0
+      if not tokenByIndex.length:
+          revert with 0, 49
+      tokenByIndex[tokenByIndex.length] = 0
+      tokenByIndex.length--
+  if balanceOf[stor16] > -2:
+      revert with 0, 17
+  balanceOf[stor16]++
+  ownerOf[_param1] = stor16
+  log Transfer(
+        address from=0,
+        address to=stor16,
+        uint256 value=_param1)
+  if ext_code.size(stor16):
+      require ext_code.size(stor16)
+      call stor16.onERC721Received(address operator, address from, uint256 tokenId, bytes data) with:
+           gas gas_remaining wei
+          args 0, uint32(caller), 0, _param1, 128, 0
+      if not ext_call.success:
+          if not return_data.size:
+              revert with 0, 'ERC721: transfer to non ERC721Receiver implementer'
+          if not return_data.size:
+              revert with 0, 'ERC721: transfer to non ERC721Receiver implementer'
+          revert with ext_call.return_data[0 len return_data.size]
+      require return_data.size >=′ 32
+      require ext_call.return_data == Mask(32, 224, ext_call.return_data[0])
+      if Mask(32, 224, ext_call.return_data[0]) != 0x150b7a0200000000000000000000000000000000000000000000000000000000:
+          revert with 0, 'ERC721: transfer to non ERC721Receiver implementer'
+  log 0x9e54f6a4: _param1
+  stor12 = 1
+  return _param1
+
+def name(): # not payable
+  if bool(stor0.length):
+      if bool(stor0.length) == uint255(stor0.length) * 0.5 < 32:
+          revert with 0, 34
+      if bool(stor0.length):
+          if bool(stor0.length) == uint255(stor0.length) * 0.5 < 32:
+              revert with 0, 34
+          if Mask(256, -1, stor0.length):
+              if 31 < uint255(stor0.length) * 0.5:
+                  mem[128] = uint256(stor0.field_0)
+                  idx = 128
+                  s = 0
+                  while (uint255(stor0.length) * 0.5) + 96 > idx:
+                      mem[idx + 32] = stor0[s].field_256
+                      idx = idx + 32
+                      s = s + 1
+                      continue 
+                  return Array(len=2 * Mask(256, -1, stor0.length), data=mem[128 len ceil32(uint255(stor0.length) * 0.5)])
+              mem[128] = 256 * stor0.length.field_8
+      else:
+          if bool(stor0.length) == stor0.length.field_1 < 32:
+              revert with 0, 34
+          if stor0.length.field_1:
+              if 31 < stor0.length.field_1:
+                  mem[128] = uint256(stor0.field_0)
+                  idx = 128
+                  s = 0
+                  while stor0.length.field_1 + 96 > idx:
+                      mem[idx + 32] = stor0[s].field_256
+                      idx = idx + 32
+                      s = s + 1
+                      continue 
+                  return Array(len=2 * Mask(256, -1, stor0.length), data=mem[128 len ceil32(uint255(stor0.length) * 0.5)])
+              mem[128] = 256 * stor0.length.field_8
+      mem[ceil32(uint255(stor0.length) * 0.5) + 192 len ceil32(uint255(stor0.length) * 0.5)] = mem[128 len ceil32(uint255(stor0.length) * 0.5)]
+      if ceil32(uint255(stor0.length) * 0.5) > uint255(stor0.length) * 0.5:
+          mem[(uint255(stor0.length) * 0.5) + ceil32(uint255(stor0.length) * 0.5) + 192] = 0
+      return Array(len=2 * Mask(256, -1, stor0.length), data=mem[128 len ceil32(uint255(stor0.length) * 0.5)], mem[(2 * ceil32(uint255(stor0.length) * 0.5)) + 192 len 2 * ceil32(uint255(stor0.length) * 0.5)]), 
+  if bool(stor0.length) == stor0.length.field_1 < 32:
+      revert with 0, 34
+  if bool(stor0.length):
+      if bool(stor0.length) == uint255(stor0.length) * 0.5 < 32:
+          revert with 0, 34
+      if Mask(256, -1, stor0.length):
+          if 31 < uint255(stor0.length) * 0.5:
+              mem[128] = uint256(stor0.field_0)
+              idx = 128
+              s = 0
+              while (uint255(stor0.length) * 0.5) + 96 > idx:
+                  mem[idx + 32] = stor0[s].field_256
+                  idx = idx + 32
+                  s = s + 1
+                  continue 
+              return Array(len=stor0.length % 128, data=mem[128 len ceil32(stor0.length.field_1)])
+          mem[128] = 256 * stor0.length.field_8
+  else:
+      if bool(stor0.length) == stor0.length.field_1 < 32:
+          revert with 0, 34
+      if stor0.length.field_1:
+          if 31 < stor0.length.field_1:
+              mem[128] = uint256(stor0.field_0)
+              idx = 128
+              s = 0
+              while stor0.length.field_1 + 96 > idx:
+                  mem[idx + 32] = stor0[s].field_256
+                  idx = idx + 32
+                  s = s + 1
+                  continue 
+              return Array(len=stor0.length % 128, data=mem[128 len ceil32(stor0.length.field_1)])
+          mem[128] = 256 * stor0.length.field_8
+  mem[ceil32(stor0.length.field_1) + 192 len ceil32(stor0.length.field_1)] = mem[128 len ceil32(stor0.length.field_1)]
+  if ceil32(stor0.length.field_1) > stor0.length.field_1:
+      mem[stor0.length.field_1 + ceil32(stor0.length.field_1) + 192] = 0
+  return Array(len=stor0.length % 128, data=mem[128 len ceil32(stor0.length.field_1)], mem[(2 * ceil32(stor0.length.field_1)) + 192 len 2 * ceil32(stor0.length.field_1)]), 
+
+def symbol(): # not payable
+  if bool(stor1.length):
+      if bool(stor1.length) == uint255(stor1.length) * 0.5 < 32:
+          revert with 0, 34
+      if bool(stor1.length):
+          if bool(stor1.length) == uint255(stor1.length) * 0.5 < 32:
+              revert with 0, 34
+          if Mask(256, -1, stor1.length):
+              if 31 < uint255(stor1.length) * 0.5:
+                  mem[128] = uint256(stor1.field_0)
+                  idx = 128
+                  s = 0
+                  while (uint255(stor1.length) * 0.5) + 96 > idx:
+                      mem[idx + 32] = stor1[s].field_256
+                      idx = idx + 32
+                      s = s + 1
+                      continue 
+                  return Array(len=2 * Mask(256, -1, stor1.length), data=mem[128 len ceil32(uint255(stor1.length) * 0.5)])
+              mem[128] = 256 * stor1.length.field_8
+      else:
+          if bool(stor1.length) == stor1.length.field_1 < 32:
+              revert with 0, 34
+          if stor1.length.field_1:
+              if 31 < stor1.length.field_1:
+                  mem[128] = uint256(stor1.field_0)
+                  idx = 128
+                  s = 0
+                  while stor1.length.field_1 + 96 > idx:
+                      mem[idx + 32] = stor1[s].field_256
+                      idx = idx + 32
+                      s = s + 1
+                      continue 
+                  return Array(len=2 * Mask(256, -1, stor1.length), data=mem[128 len ceil32(uint255(stor1.length) * 0.5)])
+              mem[128] = 256 * stor1.length.field_8
+      mem[ceil32(uint255(stor1.length) * 0.5) + 192 len ceil32(uint255(stor1.length) * 0.5)] = mem[128 len ceil32(uint255(stor1.length) * 0.5)]
+      if ceil32(uint255(stor1.length) * 0.5) > uint255(stor1.length) * 0.5:
+          mem[(uint255(stor1.length) * 0.5) + ceil32(uint255(stor1.length) * 0.5) + 192] = 0
+      return Array(len=2 * Mask(256, -1, stor1.length), data=mem[128 len ceil32(uint255(stor1.length) * 0.5)], mem[(2 * ceil32(uint255(stor1.length) * 0.5)) + 192 len 2 * ceil32(uint255(stor1.length) * 0.5)]), 
+  if bool(stor1.length) == stor1.length.field_1 < 32:
+      revert with 0, 34
+  if bool(stor1.length):
+      if bool(stor1.length) == uint255(stor1.length) * 0.5 < 32:
+          revert with 0, 34
+      if Mask(256, -1, stor1.length):
+          if 31 < uint255(stor1.length) * 0.5:
+              mem[128] = uint256(stor1.field_0)
+              idx = 128
+              s = 0
+              while (uint255(stor1.length) * 0.5) + 96 > idx:
+                  mem[idx + 32] = stor1[s].field_256
+                  idx = idx + 32
+                  s = s + 1
+                  continue 
+              return Array(len=stor1.length % 128, data=mem[128 len ceil32(stor1.length.field_1)])
+          mem[128] = 256 * stor1.length.field_8
+  else:
+      if bool(stor1.length) == stor1.length.field_1 < 32:
+          revert with 0, 34
+      if stor1.length.field_1:
+          if 31 < stor1.length.field_1:
+              mem[128] = uint256(stor1.field_0)
+              idx = 128
+              s = 0
+              while stor1.length.field_1 + 96 > idx:
+                  mem[idx + 32] = stor1[s].field_256
+                  idx = idx + 32
+                  s = s + 1
+                  continue 
+              return Array(len=stor1.length % 128, data=mem[128 len ceil32(stor1.length.field_1)])
+          mem[128] = 256 * stor1.length.field_8
+  mem[ceil32(stor1.length.field_1) + 192 len ceil32(stor1.length.field_1)] = mem[128 len ceil32(stor1.length.field_1)]
+  if ceil32(stor1.length.field_1) > stor1.length.field_1:
+      mem[stor1.length.field_1 + ceil32(stor1.length.field_1) + 192] = 0
+  return Array(len=stor1.length % 128, data=mem[128 len ceil32(stor1.length.field_1)], mem[(2 * ceil32(stor1.length.field_1)) + 192 len 2 * ceil32(stor1.length.field_1)]), 
+
+def transferFrom(address _from, address _to, uint256 _value): # not payable
+  require calldata.size - 4 >=′ 96
+  require _from == _from
+  require _to == _to
+  if not ownerOf[_value]:
+      revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: operator query for nonexistent token'
+  if not ownerOf[_value]:
+      revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: owner query for nonexistent token'
+  if caller == ownerOf[_value]:
+      if not ownerOf[_value]:
+          revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: owner query for nonexistent token'
+      if ownerOf[_value] != _from:
+          revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: transfer of token that is not own'
+      if not _to:
+          revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: transfer to the zero address'
+      if not _from:
+          stor9[_value] = tokenByIndex.length
+          tokenByIndex.length++
+          tokenByIndex[tokenByIndex.length] = _value
+      else:
+          if _from != _to:
+              if not _from:
+                  revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: balance query for the zero address'
+              if balanceOf[addr(_from)] < 1:
+                  revert with 0, 17
+              if balanceOf[addr(_from)] - 1 != stor7[_value]:
+                  tokenOfOwnerByIndex[addr(_from)][stor7[_value]] = tokenOfOwnerByIndex[addr(_from)][stor3[addr(_from)] - 1]
+                  stor7[stor6[addr(_from)][stor3[addr(_from)] - 1]] = stor7[_value]
+              stor7[_value] = 0
+              tokenOfOwnerByIndex[addr(_from)][stor3[addr(_from)] - 1] = 0
+      if _to:
+          if _to != _from:
+              if not _to:
+                  revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: balance query for the zero address'
+              tokenOfOwnerByIndex[addr(_to)][stor3[addr(_to)]] = _value
+              stor7[_value] = balanceOf[addr(_to)]
+      else:
+          if tokenByIndex.length < 1:
+              revert with 0, 17
+          if tokenByIndex.length - 1 >= tokenByIndex.length:
+              revert with 0, 50
+          if stor9[_value] >= tokenByIndex.length:
+              revert with 0, 50
+          tokenByIndex[stor9[_value]] = tokenByIndex[tokenByIndex.length]
+          stor9[stor8[stor8.length]] = stor9[_value]
+          stor9[_value] = 0
+          if not tokenByIndex.length:
+              revert with 0, 49
+          tokenByIndex[tokenByIndex.length] = 0
+          tokenByIndex.length--
+      approved[_value] = 0
+      if not ownerOf[_value]:
+          revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: owner query for nonexistent token'
+  else:
+      if not ownerOf[_value]:
+          revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: approved query for nonexistent token'
+      if approved[_value] == caller:
+          if not ownerOf[_value]:
+              revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: owner query for nonexistent token'
+          if ownerOf[_value] != _from:
+              revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: transfer of token that is not own'
+          if not _to:
+              revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: transfer to the zero address'
+          if not _from:
+              stor9[_value] = tokenByIndex.length
+              tokenByIndex.length++
+              tokenByIndex[tokenByIndex.length] = _value
+          else:
+              if _from != _to:
+                  if not _from:
+                      revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: balance query for the zero address'
+                  if balanceOf[addr(_from)] < 1:
+                      revert with 0, 17
+                  if balanceOf[addr(_from)] - 1 != stor7[_value]:
+                      tokenOfOwnerByIndex[addr(_from)][stor7[_value]] = tokenOfOwnerByIndex[addr(_from)][stor3[addr(_from)] - 1]
+                      stor7[stor6[addr(_from)][stor3[addr(_from)] - 1]] = stor7[_value]
+                  stor7[_value] = 0
+                  tokenOfOwnerByIndex[addr(_from)][stor3[addr(_from)] - 1] = 0
+          if _to:
+              if _to != _from:
+                  if not _to:
+                      revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: balance query for the zero address'
+                  tokenOfOwnerByIndex[addr(_to)][stor3[addr(_to)]] = _value
+                  stor7[_value] = balanceOf[addr(_to)]
+          else:
+              if tokenByIndex.length < 1:
+                  revert with 0, 17
+              if tokenByIndex.length - 1 >= tokenByIndex.length:
+                  revert with 0, 50
+              if stor9[_value] >= tokenByIndex.length:
+                  revert with 0, 50
+              tokenByIndex[stor9[_value]] = tokenByIndex[tokenByIndex.length]
+              stor9[stor8[stor8.length]] = stor9[_value]
+              stor9[_value] = 0
+              if not tokenByIndex.length:
+                  revert with 0, 49
+              tokenByIndex[tokenByIndex.length] = 0
+              tokenByIndex.length--
+          approved[_value] = 0
+          if not ownerOf[_value]:
+              revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: owner query for nonexistent token'
+      else:
+          require ext_code.size(0xb7c980b5d84104b28d77b0885cb8c43a6dfa5355)
+          static call 0xb7c980b5d84104b28d77b0885cb8c43a6dfa5355.proxies(address param1) with:
+                  gas gas_remaining wei
+                 args ownerOf[_value]
+          if not ext_call.success:
+              revert with ext_call.return_data[0 len return_data.size]
+          require return_data.size >=′ 32
+          require ext_call.return_data == ext_call.return_data[12 len 20]
+          if ext_call.return_data[12 len 20] != caller:
+              if not stor5[stor2[_value]][caller]:
+                  revert with 0, 'ERC721: transfer caller is not owner nor approved'
+          if not ownerOf[_value]:
+              revert with 0, 'ERC721: owner query for nonexistent token'
+          if ownerOf[_value] != _from:
+              revert with 0, 'ERC721: transfer of token that is not own'
+          if not _to:
+              revert with 0, 'ERC721: transfer to the zero address'
+          if not _from:
+              stor9[_value] = tokenByIndex.length
+              tokenByIndex.length++
+              tokenByIndex[tokenByIndex.length] = _value
+          else:
+              if _from != _to:
+                  if not _from:
+                      revert with 0, 'ERC721: balance query for the zero address'
+                  if balanceOf[addr(_from)] < 1:
+                      revert with 0, 17
+                  if balanceOf[addr(_from)] - 1 != stor7[_value]:
+                      tokenOfOwnerByIndex[addr(_from)][stor7[_value]] = tokenOfOwnerByIndex[addr(_from)][stor3[addr(_from)] - 1]
+                      stor7[stor6[addr(_from)][stor3[addr(_from)] - 1]] = stor7[_value]
+                  stor7[_value] = 0
+                  tokenOfOwnerByIndex[addr(_from)][stor3[addr(_from)] - 1] = 0
+          if _to:
+              if _to != _from:
+                  if not _to:
+                      revert with 0, 'ERC721: balance query for the zero address'
+                  tokenOfOwnerByIndex[addr(_to)][stor3[addr(_to)]] = _value
+                  stor7[_value] = balanceOf[addr(_to)]
+          else:
+              if tokenByIndex.length < 1:
+                  revert with 0, 17
+              if tokenByIndex.length - 1 >= tokenByIndex.length:
+                  revert with 0, 50
+              if stor9[_value] >= tokenByIndex.length:
+                  revert with 0, 50
+              tokenByIndex[stor9[_value]] = tokenByIndex[tokenByIndex.length]
+              stor9[stor8[stor8.length]] = stor9[_value]
+              stor9[_value] = 0
+              if not tokenByIndex.length:
+                  revert with 0, 49
+              tokenByIndex[tokenByIndex.length] = 0
+              tokenByIndex.length--
+          approved[_value] = 0
+          if not ownerOf[_value]:
+              revert with 0, 'ERC721: owner query for nonexistent token'
+  ('bool', ('stor', ('map', ('param', '_value'), ('name', 'ownerOf', 2))))
+  log Approval(
+        address owner=ownerOf[_value],
+        address spender=0,
+        uint256 value=_value)
+  if balanceOf[addr(_from)] < 1:
+      revert with 0, 17
+  balanceOf[addr(_from)]--
+  if balanceOf[addr(_to)] > -2:
+      revert with 0, 17
+  balanceOf[addr(_to)]++
+  ownerOf[_value] = _to
+  log Transfer(
+        address from=_from,
+        address to=_to,
+        uint256 value=_value)
+
+def burn(uint256 _value): # not payable
+  require calldata.size - 4 >=′ 32
+  if not ownerOf[_value]:
+      revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: operator query for nonexistent token'
+  if not ownerOf[_value]:
+      revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: owner query for nonexistent token'
+  if caller == ownerOf[_value]:
+      if stor16 != caller:
+          if owner != caller:
+              revert with 0, 'Not a grounder'
+      if not ownerOf[_value]:
+          revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: owner query for nonexistent token'
+      if ownerOf[_value]:
+          if not ownerOf[_value]:
+              revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: balance query for the zero address'
+          if balanceOf[stor2[_value]] < 1:
+              revert with 0, 17
+          if balanceOf[stor2[_value]] - 1 != stor7[_value]:
+              tokenOfOwnerByIndex[stor2[_value]][stor7[_value]] = tokenOfOwnerByIndex[stor2[_value]][stor3[stor2[_value]] - 1]
+              stor7[stor6[stor2[_value]][stor3[stor2[_value]] - 1]] = stor7[_value]
+          stor7[_value] = 0
+          tokenOfOwnerByIndex[stor2[_value]][stor3[stor2[_value]] - 1] = 0
+      if tokenByIndex.length < 1:
+          revert with 0, 17
+      if tokenByIndex.length - 1 >= tokenByIndex.length:
+          revert with 0, 50
+      if stor9[_value] >= tokenByIndex.length:
+          revert with 0, 50
+      tokenByIndex[stor9[_value]] = tokenByIndex[tokenByIndex.length]
+      stor9[stor8[stor8.length]] = stor9[_value]
+      stor9[_value] = 0
+      if not tokenByIndex.length:
+          revert with 0, 49
+      tokenByIndex[tokenByIndex.length] = 0
+      tokenByIndex.length--
+      approved[_value] = 0
+      if not ownerOf[_value]:
+          revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: owner query for nonexistent token'
+  else:
+      if not ownerOf[_value]:
+          revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: approved query for nonexistent token'
+      if approved[_value] == caller:
+          if stor16 != caller:
+              if owner != caller:
+                  revert with 0, 'Not a grounder'
+          if not ownerOf[_value]:
+              revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: owner query for nonexistent token'
+          if ownerOf[_value]:
+              if not ownerOf[_value]:
+                  revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: balance query for the zero address'
+              if balanceOf[stor2[_value]] < 1:
+                  revert with 0, 17
+              if balanceOf[stor2[_value]] - 1 != stor7[_value]:
+                  tokenOfOwnerByIndex[stor2[_value]][stor7[_value]] = tokenOfOwnerByIndex[stor2[_value]][stor3[stor2[_value]] - 1]
+                  stor7[stor6[stor2[_value]][stor3[stor2[_value]] - 1]] = stor7[_value]
+              stor7[_value] = 0
+              tokenOfOwnerByIndex[stor2[_value]][stor3[stor2[_value]] - 1] = 0
+          if tokenByIndex.length < 1:
+              revert with 0, 17
+          if tokenByIndex.length - 1 >= tokenByIndex.length:
+              revert with 0, 50
+          if stor9[_value] >= tokenByIndex.length:
+              revert with 0, 50
+          tokenByIndex[stor9[_value]] = tokenByIndex[tokenByIndex.length]
+          stor9[stor8[stor8.length]] = stor9[_value]
+          stor9[_value] = 0
+          if not tokenByIndex.length:
+              revert with 0, 49
+          tokenByIndex[tokenByIndex.length] = 0
+          tokenByIndex.length--
+          approved[_value] = 0
+          if not ownerOf[_value]:
+              revert with 0x8c379a000000000000000000000000000000000000000000000000000000000, 'ERC721: owner query for nonexistent token'
+      else:
+          require ext_code.size(0xb7c980b5d84104b28d77b0885cb8c43a6dfa5355)
+          static call 0xb7c980b5d84104b28d77b0885cb8c43a6dfa5355.proxies(address param1) with:
+                  gas gas_remaining wei
+                 args ownerOf[_value]
+          if not ext_call.success:
+              revert with ext_call.return_data[0 len return_data.size]
+          require return_data.size >=′ 32
+          require ext_call.return_data == ext_call.return_data[12 len 20]
+          if ext_call.return_data[12 len 20] != caller:
+              if not stor5[stor2[_value]][caller]:
+                  revert with 0, 'ERC721Burnable: caller is not owner nor approved'
+          if stor16 != caller:
+              if owner != caller:
+                  revert with 0, 'Not a grounder'
+          if not ownerOf[_value]:
+              revert with 0, 'ERC721: owner query for nonexistent token'
+          if ownerOf[_value]:
+              if not ownerOf[_value]:
+                  revert with 0, 'ERC721: balance query for the zero address'
+              if balanceOf[stor2[_value]] < 1:
+                  revert with 0, 17
+              if balanceOf[stor2[_value]] - 1 != stor7[_value]:
+                  tokenOfOwnerByIndex[stor2[_value]][stor7[_value]] = tokenOfOwnerByIndex[stor2[_value]][stor3[stor2[_value]] - 1]
+                  stor7[stor6[stor2[_value]][stor3[stor2[_value]] - 1]] = stor7[_value]
+              stor7[_value] = 0
+              tokenOfOwnerByIndex[stor2[_value]][stor3[stor2[_value]] - 1] = 0
+          if tokenByIndex.length < 1:
+              revert with 0, 17
+          if tokenByIndex.length - 1 >= tokenByIndex.length:
+              revert with 0, 50
+          if stor9[_value] >= tokenByIndex.length:
+              revert with 0, 50
+          tokenByIndex[stor9[_value]] = tokenByIndex[tokenByIndex.length]
+          stor9[stor8[stor8.length]] = stor9[_value]
+          stor9[_value] = 0
+          if not tokenByIndex.length:
+              revert with 0, 49
+          tokenByIndex[tokenByIndex.length] = 0
+          tokenByIndex.length--
+          approved[_value] = 0
+          if not ownerOf[_value]:
+              revert with 0, 'ERC721: owner query for nonexistent token'
+  ('bool', ('stor', ('map', ('param', '_value'), ('name', 'ownerOf', 2))))
+  log Approval(
+        address owner=ownerOf[_value],
+        address spender=0,
+        uint256 value=_value)
+  if balanceOf[stor2[_value]] < 1:
+      revert with 0, 17
+  balanceOf[stor2[_value]]--
+  ownerOf[_value] = 0
+  log Transfer(
+        address from=ownerOf[_value],
+        address to=0,
+        uint256 value=_value)
+  if stor10[_value].field_0:
+      if stor10[_value].field_0 == uint255(stor10[_value].field_0) * 0.5 < 32:
+          revert with 0, 34
+      if Mask(256, -1, stor10[_value].field_0):
+          if stor10[_value].field_0:
+              if stor10[_value].field_0 == uint255(stor10[_value].field_0) * 0.5 < 32:
+                  revert with 0, 34
+              stor10[_value].field_0 = 0
+              if 31 < uint255(stor10[_value].field_0) * 0.5:
+                  idx = 0
+                  while (uint255(stor10[_value].field_0) * 0.5) + 31 / 32 > idx:
+                      stor10[_value][idx].field_0 = 0
+                      idx = idx + 1
+                      continue 
+          else:
+              if stor10[_value].field_0 == stor10[_value].field_1 < 32:
+                  revert with 0, 34
+              stor10[_value].field_0 = 0
+              if 31 < stor10[_value].field_1:
+                  idx = 0
+                  while stor10[_value].field_1 + 31 / 32 > idx:
+                      stor10[_value][idx].field_0 = 0
+                      idx = idx + 1
+                      continue 
+  else:
+      if stor10[_value].field_0 == stor10[_value].field_1 < 32:
+          revert with 0, 34
+      if stor10[_value].field_1:
+          if stor10[_value].field_0:
+              if stor10[_value].field_0 == uint255(stor10[_value].field_0) * 0.5 < 32:
+                  revert with 0, 34
+              stor10[_value].field_0 = 0
+              if 31 < uint255(stor10[_value].field_0) * 0.5:
+                  idx = 0
+                  while (uint255(stor10[_value].field_0) * 0.5) + 31 / 32 > idx:
+                      stor10[_value][idx].field_0 = 0
+                      idx = idx + 1
+                      continue 
+          else:
+              if stor10[_value].field_0 == stor10[_value].field_1 < 32:
+                  revert with 0, 34
+              stor10[_value].field_0 = 0
+              if 31 < stor10[_value].field_1:
+                  idx = 0
+                  while stor10[_value].field_1 + 31 / 32 > idx:
+                      stor10[_value][idx].field_0 = 0
+                      idx = idx + 1
+                      continue 
+  log 0x8bb0e8d8: _value
+
+def safeTransferFrom(address _from, address _to, uint256 _tokenId): # not payable
+  require calldata.size - 4 >=′ 96
+  require _from == _from
+  require _to == _to
+  if not ownerOf[_tokenId]:
+      revert with 0, 'ERC721: operator query for nonexistent token'
+  if not ownerOf[_tokenId]:
+      revert with 0, 'ERC721: owner query for nonexistent token'
+  if caller == ownerOf[_tokenId]:
+      if not ownerOf[_tokenId]:
+          revert with 0, 'ERC721: owner query for nonexistent token'
+      if ownerOf[_tokenId] != _from:
+          revert with 0, 'ERC721: transfer of token that is not own'
+      if not _to:
+          revert with 0, 'ERC721: transfer to the zero address'
+      if not _from:
+          stor9[_tokenId] = tokenByIndex.length
+          tokenByIndex.length++
+          tokenByIndex[tokenByIndex.length] = _tokenId
+      else:
+          if _from != _to:
+              if not _from:
+                  revert with 0, 'ERC721: balance query for the zero address'
+              if balanceOf[addr(_from)] < 1:
+                  revert with 0, 17
+              if balanceOf[addr(_from)] - 1 != stor7[_tokenId]:
+                  tokenOfOwnerByIndex[addr(_from)][stor7[_tokenId]] = tokenOfOwnerByIndex[addr(_from)][stor3[addr(_from)] - 1]
+                  stor7[stor6[addr(_from)][stor3[addr(_from)] - 1]] = stor7[_tokenId]
+              stor7[_tokenId] = 0
+              tokenOfOwnerByIndex[addr(_from)][stor3[addr(_from)] - 1] = 0
+      if _to:
+          if _to != _from:
+              if not _to:
+                  revert with 0, 'ERC721: balance query for the zero address'
+              tokenOfOwnerByIndex[addr(_to)][stor3[addr(_to)]] = _tokenId
+              stor7[_tokenId] = balanceOf[addr(_to)]
+      else:
+          if tokenByIndex.length < 1:
+              revert with 0, 17
+          if tokenByIndex.length - 1 >= tokenByIndex.length:
+              revert with 0, 50
+          if stor9[_tokenId] >= tokenByIndex.length:
+              revert with 0, 50
+          tokenByIndex[stor9[_tokenId]] = tokenByIndex[tokenByIndex.length]
+          stor9[stor8[stor8.length]] = stor9[_tokenId]
+          stor9[_tokenId] = 0
+          if not tokenByIndex.length:
+              revert with 0, 49
+          tokenByIndex[tokenByIndex.length] = 0
+          tokenByIndex.length--
+      approved[_tokenId] = 0
+      if not ownerOf[_tokenId]:
+          revert with 0, 'ERC721: owner query for nonexistent token'
+      log Approval(
+            address owner=ownerOf[_tokenId],
+            address spender=0,
+            uint256 value=_tokenId)
+      if balanceOf[addr(_from)] < 1:
+          revert with 0, 17
+      balanceOf[addr(_from)]--
+      if balanceOf[addr(_to)] > -2:
+          revert with 0, 17
+      balanceOf[addr(_to)]++
+      ownerOf[_tokenId] = _to
+      log Transfer(
+            address from=_from,
+            address to=_to,
+            uint256 value=_tokenId)
+      if ext_code.size(_to):
+          require ext_code.size(_to)
+          call _to.onERC721Received(address operator, address from, uint256 tokenId, bytes data) with:
+               gas gas_remaining wei
+              args 0, uint32(caller), addr(_from), _tokenId, 128, 0
+          if not ext_call.success:
+              if not return_data.size:
+                  revert with 0, 'ERC721: transfer to non ERC721Receiver implementer'
+              if not return_data.size:
+                  revert with 0, 'ERC721: transfer to non ERC721Receiver implementer'
+              revert with ext_call.return_data[0 len return_data.size]
+          require return_data.size >=′ 32
+          require ext_call.return_data == Mask(32, 224, ext_call.return_data[0])
+          if Mask(32, 224, ext_call.return_data[0]) != 0x150b7a0200000000000000000000000000000000000000000000000000000000:
+              revert with 0, 'ERC721: transfer to non ERC721Receiver implementer'
+  else:
+      if not ownerOf[_tokenId]:
+          revert with 0, 'ERC721: approved query for nonexistent token'
+      if approved[_tokenId] == caller:
+          if not ownerOf[_tokenId]:
+              revert with 0, 'ERC721: owner query for nonexistent token'
+          if ownerOf[_tokenId] != _from:
+              revert with 0, 'ERC721: transfer of token that is not own'
+          if not _to:
+              revert with 0, 'ERC721: transfer to the zero address'
+          if not _from:
+              stor9[_tokenId] = tokenByIndex.length
+              tokenByIndex.length++
+              tokenByIndex[tokenByIndex.length] = _tokenId
+          else:
+              if _from != _to:
+                  if not _from:
+                      revert with 0, 'ERC721: balance query for the zero address'
+                  if balanceOf[addr(_from)] < 1:
+                      revert with 0, 17
+                  if balanceOf[addr(_from)] - 1 != stor7[_tokenId]:
+                      tokenOfOwnerByIndex[addr(_from)][stor7[_tokenId]] = tokenOfOwnerByIndex[addr(_from)][stor3[addr(_from)] - 1]
+                      stor7[stor6[addr(_from)][stor3[addr(_from)] - 1]] = stor7[_tokenId]
+                  stor7[_tokenId] = 0
+                  tokenOfOwnerByIndex[addr(_from)][stor3[addr(_from)] - 1] = 0
+          if _to:
+              if _to != _from:
+                  if not _to:
+                      revert with 0, 'ERC721: balance query for the zero address'
+                  tokenOfOwnerByIndex[addr(_to)][stor3[addr(_to)]] = _tokenId
+                  stor7[_tokenId] = balanceOf[addr(_to)]
+          else:
+              if tokenByIndex.length < 1:
+                  revert with 0, 17
+              if tokenByIndex.length - 1 >= tokenByIndex.length:
+                  revert with 0, 50
+              if stor9[_tokenId] >= tokenByIndex.length:
+                  revert with 0, 50
+              tokenByIndex[stor9[_tokenId]] = tokenByIndex[tokenByIndex.length]
+              stor9[stor8[stor8.length]] = stor9[_tokenId]
+              stor9[_tokenId] = 0
+              if not tokenByIndex.length:
+                  revert with 0, 49
+              tokenByIndex[tokenByIndex.length] = 0
+              tokenByIndex.length--
+          approved[_tokenId] = 0
+          if not ownerOf[_tokenId]:
+              revert with 0, 'ERC721: owner query for nonexistent token'
+          log Approval(
+                address owner=ownerOf[_tokenId],
+                address spender=0,
+                uint256 value=_tokenId)
+          if balanceOf[addr(_from)] < 1:
+              revert with 0, 17
+          balanceOf[addr(_from)]--
+          if balanceOf[addr(_to)] > -2:
+              revert with 0, 17
+          balanceOf[addr(_to)]++
+          ownerOf[_tokenId] = _to
+          log Transfer(
+                address from=_from,
+                address to=_to,
+                uint256 value=_tokenId)
+          if ext_code.size(_to):
+              require ext_code.size(_to)
+              call _to.onERC721Received(address operator, address from, uint256 tokenId, bytes data) with:
+                   gas gas_remaining wei
+                  args 0, uint32(caller), addr(_from), _tokenId, 128, 0
+              if not ext_call.success:
+                  if not return_data.size:
+                      revert with 0, 'ERC721: transfer to non ERC721Receiver implementer'
+                  if not return_data.size:
+                      revert with 0, 'ERC721: transfer to non ERC721Receiver implementer'
+                  revert with ext_call.return_data[0 len return_data.size]
+              require return_data.size >=′ 32
+              require ext_call.return_data == Mask(32, 224, ext_call.return_data[0])
+              if Mask(32, 224, ext_call.return_data[0]) != 0x150b7a0200000000000000000000000000000000000000000000000000000000:
+                  revert with 0, 'ERC721: transfer to non ERC721Receiver implementer'
+      else:
+          require ext_code.size(0xb7c980b5d84104b28d77b0885cb8c43a6dfa5355)
+          static call 0xb7c980b5d84104b28d77b0885cb8c43a6dfa5355.proxies(address param1) with:
+                  gas gas_remaining wei
+                 args ownerOf[_tokenId]
+          if not ext_call.success:
+              revert with ext_call.return_data[0 len return_data.size]
+          require return_data.size >=′ 32
+          require ext_call.return_data == ext_call.return_data[12 len 20]
+          if ext_call.return_data[12 len 20] != caller:
+              if not stor5[stor2[_tokenId]][caller]:
+                  revert with 0, 'ERC721: transfer caller is not owner nor approved'
+          if not ownerOf[_tokenId]:
+              revert with 0, 'ERC721: owner query for nonexistent token'
+          if ownerOf[_tokenId] != _from:
+              revert with 0, 'ERC721: transfer of token that is not own'
+          if not _to:
+              revert with 0, 'ERC721: transfer to the zero address'
+          if not _from:
+              stor9[_tokenId] = tokenByIndex.length
+              tokenByIndex.length++
+              tokenByIndex[tokenByIndex.length] = _tokenId
+          else:
+              if _from != _to:
+                  if not _from:
+                      revert with 0, 'ERC721: balance query for the zero address'
+                  if balanceOf[addr(_from)] < 1:
+                      revert with 0, 17
+                  if balanceOf[addr(_from)] - 1 != stor7[_tokenId]:
+                      tokenOfOwnerByIndex[addr(_from)][stor7[_tokenId]] = tokenOfOwnerByIndex[addr(_from)][stor3[addr(_from)] - 1]
+                      stor7[stor6[addr(_from)][stor3[addr(_from)] - 1]] = stor7[_tokenId]
+                  stor7[_tokenId] = 0
+                  tokenOfOwnerByIndex[addr(_from)][stor3[addr(_from)] - 1] = 0
+          if _to:
+              if _to != _from:
+                  if not _to:
+                      revert with 0, 'ERC721: balance query for the zero address'
+                  tokenOfOwnerByIndex[addr(_to)][stor3[addr(_to)]] = _tokenId
+                  stor7[_tokenId] = balanceOf[addr(_to)]
+          else:
+              if tokenByIndex.length < 1:
+                  revert with 0, 17
+              if tokenByIndex.length - 1 >= tokenByIndex.length:
+                  revert with 0, 50
+              if stor9[_tokenId] >= tokenByIndex.length:
+                  revert with 0, 50
+              tokenByIndex[stor9[_tokenId]] = tokenByIndex[tokenByIndex.length]
+              stor9[stor8[stor8.length]] = stor9[_tokenId]
+              stor9[_tokenId] = 0
+              if not tokenByIndex.length:
+                  revert with 0, 49
+              tokenByIndex[tokenByIndex.length] = 0
+              tokenByIndex.length--
+          approved[_tokenId] = 0
+          if not ownerOf[_tokenId]:
+              revert with 0, 'ERC721: owner query for nonexistent token'
+          log Approval(
+                address owner=ownerOf[_tokenId],
+                address spender=0,
+                uint256 value=_tokenId)
+          if balanceOf[addr(_from)] < 1:
+              revert with 0, 17
+          balanceOf[addr(_from)]--
+          if balanceOf[addr(_to)] > -2:
+              revert with 0, 17
+          balanceOf[addr(_to)]++
+          ownerOf[_tokenId] = _to
+          log Transfer(
+                address from=_from,
+                address to=_to,
+                uint256 value=_tokenId)
+          if ext_code.size(_to):
+              require ext_code.size(_to)
+              call _to.onERC721Received(address operator, address from, uint256 tokenId, bytes data) with:
+                   gas gas_remaining wei
+                  args caller, addr(_from), _tokenId, 128, 0
+              if not ext_call.success:
+                  if not return_data.size:
+                      revert with 0, 'ERC721: transfer to non ERC721Receiver implementer'
+                  if not return_data.size:
+                      revert with 0, 'ERC721: transfer to non ERC721Receiver implementer'
+                  revert with ext_call.return_data[0 len return_data.size]
+              require return_data.size >=′ 32
+              require ext_call.return_data == Mask(32, 224, ext_call.return_data[0])
+              if Mask(32, 224, ext_call.return_data[0]) != 0x150b7a0200000000000000000000000000000000000000000000000000000000:
+                  revert with 0, 'ERC721: transfer to non ERC721Receiver implementer'
+
+
